@@ -9,9 +9,8 @@ import { useTokenContract } from "./hooks/useContract";
 function App() {
   const [inputData, setInputData] = useState("");
   const [dataTable, setDataTable] = useState<any>();
-  const tokenContract = useTokenContract(
-    "0x01BE23585060835E02B77ef475b0Cc51aA1e0709"
-  );
+  const [tokenAddress, setToken] = useState<any>();
+  const tokenContract = useTokenContract(tokenAddress);
   const { account, activate } = useWeb3React();
 
   const handleConfirm = async () => {
@@ -77,8 +76,35 @@ function App() {
             width: "500px",
           }}
         >
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+            }}
+          >
+            <label
+              style={{
+                fontSize: "18px",
+              }}
+            >
+              Token address:
+            </label>
+            <input
+              style={{
+                height: "40px",
+                width: "400px",
+              }}
+              name="tokenAddress"
+              onChange={(e) => {
+                setToken(e.target.value);
+              }}
+            />
+          </div>
           <textarea
             name="address"
+            style={{
+              marginTop: "20px",
+            }}
             id=""
             cols={30}
             rows={10}
